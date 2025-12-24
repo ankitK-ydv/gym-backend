@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BeastFit Gym</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+  />
+
+  <style>
+    :root {
+      --primary: #ff4b2b;
+      --dark-bg: #060608;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+      background-color: #050507;
+      color: #f8f9fa;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(0, 0, 0, 0.92) !important;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand-name {
+      font-family: "Anton", sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .brand-highlight {
+      color: var(--primary);
+    }
+
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link:focus {
+      color: var(--primary) !important;
+    }
+
+    /* Hero section */
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.9),
+          rgba(0, 0, 0, 0.3)
+        ),
+        url("https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg")
+          center/cover no-repeat;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding-top: 5rem;
+      padding-bottom: 4rem;
+    }
+
+    .hero-title-small {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.9rem;
+    }
+
+    .hero-title-main {
+      font-family: "Anton", sans-serif;
+      font-size: clamp(3rem, 6vw, 4.8rem);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1.1;
+      text-shadow: 0 6px 18px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-title-main span {
+      color: var(--primary);
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      max-width: 500px;
+      color: #d4d4d4;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 0.75rem;
+    }
+
+
+    .overlay-bg {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0.2),
+    transparent
+  );
+}
+
+
+
+
+
+
+    /* Reusable section style */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-wrapper {
+      border-radius: 1.5rem;
+      padding: 3rem 2rem;
+      background: radial-gradient(circle at top left, #1a1a1a 0, #050507 60%);
+    }
+
+    .section-title {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+      font-size: 0.85rem;
+    }
+
+    .section-heading {
+      font-weight: 700;
+      font-size: 2rem;
+      color: #fff;
+    }
+
+    .section-heading span {
+      color: var(--primary);
+    }
+
+    .section-subtext {
+      color: #a8a8a8;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+
+    /* ===== Athlete / Gallery Overlay Text Fix ===== */
+
+.overlay-title {
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.overlay-subtitle {
+  color: #e5e5e5 !important;
+  font-size: 0.9rem;
+}
+
+.overlay-badge {
+  color: #ffffff !important;
+  background: rgba(255, 0, 0, 0.85);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+}
+
+
+    /* Pricing cards */
+    .pricing-card {
+      border-radius: 1.25rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: linear-gradient(
+        135deg,
+        rgba(10, 10, 12, 0.95),
+        rgba(8, 8, 10, 0.98)
+      );
+      transition: transform 0.2s ease, box-shadow 0.2s ease,
+        border-color 0.2s ease, background 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(255, 75, 43, 0.16), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      border-color: rgba(255, 75, 43, 0.5);
+    }
+
+    .pricing-card:hover::before {
+      opacity: 1;
+    }
+
+    .pricing-badge {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #f1f1f1;
+    }
+
+    .pricing-price {
+      font-size: 2.1rem;
+      font-weight: 700;
+    }
+
+   
+    .feature-list li {
+      margin-bottom: 0.4rem;
+      font-size: 0.9rem;
+      color: #d4d4d4;
+    }
+
+/* Price styling fix */
+
+.price-amount {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.price-amount span {
+  font-size: inherit; /* price number same as ₹ */
+  font-weight: inherit;
+}
+
+.price-duration {
+  font-size: 0.85rem;
+  color: #b5b5b5;
+  margin-left: 6px;
+}
+
+.pricing-card:hover .price-amount {
+  color: #ff4b2b;
+}
+
+
+
+    /* Gallery */
+    .gallery-card {
+      background: linear-gradient(
+        145deg,
+        rgba(15, 15, 18, 0.95),
+        rgba(7, 7, 9, 0.98)
+      );
+      border-radius: 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease,
+        border-color 0.2s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.7);
+      border-color: rgba(255, 75, 43, 0.4);
+    }
+
+    .gallery-img {
+      height: 260px;
+      width: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-card:hover .gallery-img {
+      transform: scale(1.06);
+    }
+
+    .tag-pill {
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #cfcfcf;
+    }
+
+    /* Facilities */
+    .facility-icon-wrapper {
+      width: 64px;
+      height: 64px;
+      border-radius: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #ff4b2b33, #111);
+      margin-inline: auto;
+      margin-bottom: 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .facility-icon {
+      font-size: 2rem;
+    }
+
+    /* Contact / form */
+    .contact-card {
+      border-radius: 1.25rem;
+      background: radial-gradient(circle at top, #1b1b20, #08080a);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Input & Textarea placeholder color fix */
+     .form-control::placeholder,
+     .form-select::placeholder,
+      textarea::placeholder {
+      color: #8a8a8a !important; /* light grey */
+      opacity: 1 !important;
+    }
+
+
+    .form-control,
+    .form-select {
+      background-color: #050507;
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 0.1rem rgba(255, 75, 43, 0.4);
+      background-color: #050507;
+      color: #fff;
+    }
+
+    textarea.form-control {
+      resize: none;
+    }
+
+    /* Buttons */
+    .btn-primary-strong {
+      background: linear-gradient(135deg, #ff4b2b, #ff1e62);
+      border: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    .btn-primary-strong:hover {
+      filter: brightness(1.08);
+    }
+
+    .btn-outline-light-custom {
+      border-radius: 999px;
+      padding-inline: 1.7rem;
+      border-width: 1.5px;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Footer */
+    footer {
+      background: #020203;
+      color: #8a8a8a;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Simple fade-in animation */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadeInUp 0.7s ease forwards;
+    }
+
+    .fade-delay-1 {
+      animation-delay: 0.2s;
+    }
+
+    .fade-delay-2 {
+      animation-delay: 0.35s;
+    }
+
+    .fade-delay-3 {
+      animation-delay: 0.5s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .section-wrapper {
+        padding-inline: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#hero">
+        <i class="bi bi-barbell fs-3 brand-highlight"></i>
+        <div>
+          <div class="brand-name">
+            BEAST<span class="brand-highlight">FIT</span>
+          </div>
+          <small class="text-uppercase text-light" style="letter-spacing: 2px; font-size: 0.6rem;">
+            Hardcore Training · Real Results
+          </small>
+        </div>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="#hero">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#pricing">Plans</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#gallery">Physique</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#facilities">Facilities</a>
+          </li>
+          <li class="nav-item ms-lg-3 mt-2 mt-lg-0">
+            <a class="btn btn-primary-strong btn-sm rounded-pill" href="#contact">
+              Join Now
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-6 text-center text-lg-start fade-in-up">
+          <div class="hero-pill">
+            <i class="bi bi-lightning-charge-fill text-warning"></i>
+            <span>Premium Gym Experience</span>
+          </div>
+          <p class="hero-title-small mb-1">This Is Your Wake Up Call</p>
+          <h1 class="hero-title-main mb-3">
+            Build Your <span>Best Physique</span> Ever
+          </h1>
+          <p class="hero-subtitle">
+            Train with serious lifters, elite-level equipment, and coaches who
+            actually care. Monthly and yearly plans designed for your goals.
+          </p>
+          <div class="mt-4 d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+            <a href="#pricing" class="btn btn-primary-strong btn-lg rounded-pill px-4">
+              View Membership Plans
+            </a>
+            <a href="#contact" class="btn btn-outline-light btn-lg btn-outline-light-custom">
+              Book Free Trial
+            </a>
+          </div>
+          <div class="d-flex flex-wrap gap-3 align-items-center mt-4 justify-content-center justify-content-lg-start">
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-check-circle-fill text-success"></i>
+              <small>24/7 Access</small>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-check-circle-fill text-success"></i>
+              <small>Certified Coaches</small>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <i class="bi bi-check-circle-fill text-success"></i>
+              <small>Science-based Training</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 fade-in-up fade-delay-2">
+          <!-- Best Physique Guy Image -->
+          <div class="card bg-transparent border-0">
+            <div
+              class="position-relative overflow-hidden rounded-4"
+              style="border: 1px solid rgba(255, 255, 255, 0.18);"
+            >
+             <img
+              id="athleteImg"
+              src=""
+              class="w-100"
+              alt="Best Physique"
+              style="object-fit: cover; max-height: 430px;"
+             />
+
+            <div
+  class="position-absolute bottom-0 start-0 end-0 p-3 overlay-bg"
+>
+
+                <div class="d-flex justify-content-between align-items-end">
+                  <div>
+                 <h5 id="athleteName" class="mb-0 text-white"></h5>
+                <small id="athleteSubtitle" class="text-light">Transformation</small>
+                  </div>
+              <span id="athleteBadge" class="badge rounded-pill bg-danger">Stats</span>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex gap-3 mt-3 justify-content-center justify-content-lg-start">
+              <span class="tag-pill">
+                Strength · Aesthetics
+              </span>
+              <span class="tag-pill">
+                Transformation Stories
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-5">
+    <div class="container section-wrapper fade-in-up">
+      <div class="text-center mb-5">
+        <p class="section-title">Membership</p>
+        <h2 class="section-heading">
+          Choose Your <span>Plan</span>
+        </h2>
+        <p class="section-subtext">
+          Straightforward pricing with zero hidden charges. All memberships
+          include full gym access, cardio zone, and locker room.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Monthly Plan -->
+        <div class="col-md-4 fade-in-up fade-delay-1">
+          <div class="pricing-card h-100 p-4 d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="text-white mb-0">Monthly</h5>
+              <span class="pricing-badge">Starter</span>
+            </div>
+            <p class="text-light mb-3">Perfect to get started and feel the vibe.</p>
+           <p class="pricing-price mb-3">
+  <span class="price-amount">
+    ₹<span id="priceMonthly"></span>
+  </span>
+  <span class="price-duration">/ month</span>
+</p>
+
+            <ul class="list-unstyled feature-list mb-4">
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> Full gym & cardio access</li>
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> 1 fitness assessment</li>
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> Locker room access</li>
+              <li><i class="bi bi-x-circle-fill text-danger me-1"></i> No personal trainer</li>
+            </ul>
+            <div class="mt-auto">
+              <a href="#contact" class="btn btn-outline-light w-100 rounded-pill btn-sm">
+                Join Monthly
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Months Plan -->
+        <div class="col-md-4 fade-in-up fade-delay-2">
+          <div class="pricing-card h-100 p-4 d-flex flex-column position-relative">
+            <span
+              class="badge bg-danger position-absolute top-0 start-50 translate-middle-x mt-2"
+              style="border-radius: 999px; font-size: 0.7rem; letter-spacing: 1px;"
+            >
+              Most Popular
+            </span>
+            <div class="d-flex justify-content-between align-items-center mb-2 mt-2">
+              <h5 class="text-white mb-0">3 Months</h5>
+              <span class="pricing-badge">Value</span>
+            </div>
+            <p class="text-light mb-3">Best balance of price and consistency.</p>
+           <p class="pricing-price mb-3">
+  <span class="price-amount">
+    ₹<span id="priceQuarterly"></span>
+  </span>
+  <span class="price-duration">/ 3 months</span>
+</p>
+
+            <ul class="list-unstyled feature-list mb-4">
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> Full gym & cardio access</li>
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> 3 fitness assessments</li>
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> Customized diet guidance</li>
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> Group training sessions</li>
+            </ul>
+            <div class="mt-auto">
+              <a href="#contact" class="btn btn-primary-strong w-100 rounded-pill btn-sm">
+                Join 3 Months
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yearly Plan -->
+        <div class="col-md-4 fade-in-up fade-delay-3">
+          <div class="pricing-card h-100 p-4 d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <h5 class="text-white mb-0">Yearly</h5>
+              <span class="pricing-badge">Serious</span>
+            </div>
+            <p class="text-light mb-3">For lifters who are all in.</p>
+           <p class="pricing-price mb-3">
+  <span class="price-amount">
+    ₹<span id="priceYearly"></span>
+  </span>
+  <span class="price-duration">/ year</span>
+</p>
+
+            <ul class="list-unstyled feature-list mb-4">
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> Unlimited gym access</li>
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> Personalized workout plan</li>
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> Monthly body analysis</li>
+              <li><i class="bi bi-check-circle-fill text-success me-1"></i> Priority trainer support</li>
+            </ul>
+            <div class="mt-auto">
+              <a href="#contact" class="btn btn-outline-light w-100 rounded-pill btn-sm">
+                Join Yearly
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+    </div>
+  </section>
+
+  <!-- Physique Gallery Section -->
+  <section id="gallery" class="py-5">
+    <div class="container section-wrapper fade-in-up">
+      <div class="text-center mb-5">
+        <p class="section-title">Physique Gallery</p>
+        <h2 class="section-heading">
+          Real <span>Transformations</span>
+        </h2>
+        <p class="section-subtext">
+          These are not stock promises. These are the kind of results our members
+          achieve with consistency, nutrition, and smart training.
+        </p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="gallery-card h-100">
+            <img
+            id="galleryImg1"
+            src=""
+            class="w-100"
+            alt="Best Physique1"
+            style="object-fit: cover; max-height: 430px;"
+            />
+
+            <div class="p-3">
+           <h5 id="g1name"></h5>
+<p id="g1desc"></p>
+<span id="g1tag"></span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="gallery-card h-100">
+           <img
+            id="galleryImg2"
+            src=""
+            class="w-100"
+            alt="Best Physique2"
+            style="object-fit: cover; max-height: 430px;"
+           />
+
+            <div class="p-3">
+            <h5 id="g2name"></h5>
+<p id="g2desc"></p>
+<span id="g2tag"></span>
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="gallery-card h-100">
+            <img
+            id="galleryImg3"
+            src=""
+            class="w-100"
+            alt="Best Physique3"
+            style="object-fit: cover; max-height: 430px;"
+            />
+
+            <div class="p-3">
+              <h5 id="g3name"></h5>
+<p id="g3desc"></p>
+<span id="g3tag"></span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+  </section>
+
+  <!-- Facilities Section -->
+  <section id="facilities" class="py-5">
+    <div class="container section-wrapper fade-in-up">
+      <div class="text-center mb-5">
+        <p class="section-title">Facilities</p>
+        <h2 class="section-heading">
+          Why Train at <span>BeastFit</span>?
+        </h2>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-3 col-6 text-center">
+          <div class="facility-icon-wrapper">
+            <i class="bi bi-lightning-charge-fill facility-icon text-warning"></i>
+          </div>
+          <h6 class="text-white">Modern Equipment</h6>
+          <p class="text-light small">
+            Latest plate-loaded machines, free weights, and specialty bars.
+          </p>
+        </div>
+
+        <div class="col-md-3 col-6 text-center">
+          <div class="facility-icon-wrapper">
+            <i class="bi bi-person-arms-up facility-icon text-info"></i>
+          </div>
+          <h6 class="text-white">Certified Trainers</h6>
+          <p class="text-light small">
+            Coaches who correct your form and track your progress seriously.
+          </p>
+        </div>
+
+        <div class="col-md-3 col-6 text-center">
+          <div class="facility-icon-wrapper">
+            <i class="bi bi-droplet-half facility-icon text-primary"></i>
+          </div>
+          <h6 class="text-white">Clean & Hygienic</h6>
+          <p class="text-light small">
+            Daily cleaning schedule, sanitized equipment, and fresh towels.
+          </p>
+        </div>
+
+        <div class="col-md-3 col-6 text-center">
+          <div class="facility-icon-wrapper">
+            <i class="bi bi-cup-hot-fill facility-icon text-danger"></i>
+          </div>
+          <h6 class="text-white">Protein Bar</h6>
+          <p class="text-light small">
+            Pre-workout, post-workout shakes, and healthy snacks available.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Join Section -->
+  <section id="contact" class="py-5">
+    <div class="container section-wrapper fade-in-up">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <p class="section-title">Join Now</p>
+          <h2 class="section-heading">
+            Start Your <span>Transformation</span> Today
+          </h2>
+          <p class="text-light">
+            Drop your details and our team will call you to help choose the right
+            membership based on your goal: fat loss, muscle gain, strength, or
+            general fitness.
+          </p>
+
+          <ul class="list-unstyled text-light">
+            <li class="mb-2">
+              <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+              BeastFit Gym, Your City, India
+            </li>
+            <li class="mb-2">
+              <i class="bi bi-telephone-fill text-danger me-2"></i>
+              +91-98765-43210
+            </li>
+            <li class="mb-2">
+              <i class="bi bi-envelope-fill text-danger me-2"></i>
+              info@beastfitgym.com
+            </li>
+          </ul>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="contact-card p-4">
+            <h5 class="mb-3 text-white">Book a Free Trial Session</h5>
+           
+             <form id="contactForm">
+
+  <div class="mb-3">
+    <label class="form-label">Full Name</label>
+    <input type="text" class="form-control" name="fullName" placeholder="Your Name" required />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Phone Number</label>
+    <input type="tel" class="form-control" name="phone" placeholder="+91-XXXXXXXXXX" required />
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Preferred Plan</label>
+    <select class="form-select" name="plan" required>
+      <option value="">Choose a plan</option>
+      <option value="Monthly">Monthly</option>
+      <option value="3 Months">3 Months</option>
+      <option value="Yearly">Yearly</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Your Goal</label>
+    <textarea
+      class="form-control"
+      rows="3"
+      name="goal"
+      placeholder="Fat loss, muscle gain, strength, etc."
+    ></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary-strong w-100 rounded-pill">
+    Submit Request
+  </button>
+</form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-3">
+    <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center">
+      <p class="mb-0 small">
+        © <span id="year"></span> BeastFit Gym. All rights reserved.
+      </p>
+      <p class="mb-0 small">
+        Designed by <strong>You</strong> using <span class="brand-highlight">Bootstrap</span> 💻
+      </p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Auto update year in footer
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+<script>
+fetch("http://localhost:5000/homepage-images")
+  .then(res => res.json())
+  .then(data => {
+    const base = "http://localhost:5000";
+
+    // Hero image
+    if (data.athlete) {
+      document.getElementById("athleteImg").src = base + data.athlete;
+    }
+
+    // Gallery images
+    if (data.img1) {
+      document.getElementById("galleryImg1").src = base + data.img1;
+    }
+
+    if (data.img2) {
+      document.getElementById("galleryImg2").src = base + data.img2;
+    }
+
+    if (data.img3) {
+      document.getElementById("galleryImg3").src = base + data.img3;
+    }
+  })
+  .catch(err => console.error("Image load error:", err));
+</script>
+
+
+<script>
+fetch("http://localhost:5000/homepage-text")
+  .then(res => res.json())
+  .then(data => {
+
+    // Athlete of the Month
+    document.getElementById("athleteName").innerText =
+      data.athleteName || "";
+
+    document.getElementById("athleteSubtitle").innerText =
+      data.athleteSubtitle || "";
+
+    document.getElementById("athleteBadge").innerText =
+      data.athleteBadge || "";
+
+    // Gallery 1
+    document.getElementById("g1name").innerText = data.g1name || "";
+    document.getElementById("g1desc").innerText = data.g1desc || "";
+    document.getElementById("g1tag").innerText  = data.g1tag  || "";
+
+    // Gallery 2
+    document.getElementById("g2name").innerText = data.g2name || "";
+    document.getElementById("g2desc").innerText = data.g2desc || "";
+    document.getElementById("g2tag").innerText  = data.g2tag  || "";
+
+    // Gallery 3
+    document.getElementById("g3name").innerText = data.g3name || "";
+    document.getElementById("g3desc").innerText = data.g3desc || "";
+    document.getElementById("g3tag").innerText  = data.g3tag  || "";
+  })
+  .catch(err => console.error("Homepage text load error:", err));
+</script>
+
+
+
+<script>
+fetch("http://localhost:5000/homepage-prices")
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("priceMonthly").innerText = data.monthly;
+    document.getElementById("priceQuarterly").innerText = data.quarterly;
+    document.getElementById("priceYearly").innerText = data.yearly;
+  })
+  .catch(err => console.error("Price load error:", err));
+</script>
+
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const data = {
+    fullName: this.fullName.value,
+    phone: this.phone.value,
+    plan: this.plan.value,
+    goal: this.goal.value
+  };
+
+  fetch("/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      const modal = new bootstrap.Modal(
+        document.getElementById("successModal")
+      );
+      modal.show();
+      this.reset();
+    } else {
+      throw new Error("Failed");
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert("❌ Something went wrong. Please try again.");
+  });
+});
+</script>
+
+ 
+
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light rounded-4">
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-success">✅ Request Submitted</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Thank you for contacting <strong>BeastFit Gym</strong> 💪<br />
+          Our team will call you shortly to guide you.
+        </p>
+      </div>
+      <div class="modal-footer border-0">
+        <button class="btn btn-primary-strong rounded-pill px-4" data-bs-dismiss="modal">
+          Okay
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login – BeastFit</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+
+    body {
+  background: radial-gradient(circle at top, #1b1f27, #0b0d12);
+  height: 100vh;
+}
+
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  width: 340px;
+  padding: 30px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  animation: fadeUp 0.6s ease;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper span {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.7;
+}
+
+.password-wrapper span:hover {
+  opacity: 1;
+}
+
+.form-control {
+  background: #f1f1f1;
+}
+
+
+
+  </style>
+</head>
+<body class="bg-dark d-flex align-items-center justify-content-center" style="height:100vh;">
+
+<div class="login-wrapper">
+  <div class="login-card shadow-lg">
+
+    <h3 class="text-white mb-4 text-center">Admin Login</h3>
+
+    <form id="adminLoginForm">
+
+      <input
+        type="text"
+        name="username"
+        class="form-control mb-3"
+        placeholder="Username"
+        required
+      />
+
+      <!-- PASSWORD WITH TOGGLE -->
+      <div class="password-wrapper mb-3">
+        <input
+          type="password"
+          name="password"
+          id="passwordInput"
+          class="form-control"
+          placeholder="Password"
+          required
+        />
+        <span id="togglePassword">👁️</span>
+      </div>
+
+      <button class="btn btn-danger w-100 mt-2">
+        Login
+      </button>
+    </form>
+
+  </div>
+</div>
+
+
+
+<script>
+document.getElementById("adminLoginForm").addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const formData = {
+    username: this.username.value,
+    password: this.password.value
+  };
+
+  try {
+    const res = await fetch("/admin-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      window.location.href = "/admin.html";
+    } else {
+      document.getElementById("loginErrorMsg").innerText =
+        data.message || "Invalid username or password";
+
+      new bootstrap.Modal(
+        document.getElementById("loginErrorModal")
+      ).show();
+    }
+
+  } catch (err) {
+    document.getElementById("loginErrorMsg").innerText =
+      "Server error. Please try again.";
+
+    new bootstrap.Modal(
+      document.getElementById("loginErrorModal")
+    ).show();
+  }
+});
+</script>
+
+
+<script>
+const toggle = document.getElementById("togglePassword");
+const passwordInput = document.getElementById("passwordInput");
+
+toggle.addEventListener("click", () => {
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    toggle.innerText = "🙈";
+  } else {
+    passwordInput.type = "password";
+    toggle.innerText = "👁️";
+  }
+});
+</script>
+
+
+
+<!-- Login Error Modal -->
+<div class="modal fade" id="loginErrorModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-light rounded-4">
+      <div class="modal-header border-0">
+        <h5 class="modal-title text-danger">❌ Login Failed</h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal">
+        </button>
+      </div>
+      <div class="modal-body">
+        <p id="loginErrorMsg">Invalid username or password</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>
