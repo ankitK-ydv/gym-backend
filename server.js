@@ -192,7 +192,7 @@ app.get("/adminlogin.html", (req, res) => {
 });
 
 app.get("/admin.html", checkAuth, (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "admin.html"));
+  res.sendFile(path.join(__dirname, "private", "admin.html"));
 });
 
 
