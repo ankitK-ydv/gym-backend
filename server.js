@@ -1,14 +1,4 @@
 
-const fs = require("fs");
-
-if (!fs.existsSync("uploads")) {
-  fs.mkdirSync("uploads");
-}
-if (!fs.existsSync("uploads/homepage")) {
-  fs.mkdirSync("uploads/homepage", { recursive: true });
-}
-
-
 console.log("🔥 THIS SERVER.JS FILE IS RUNNING 🔥");
 
 const multer = require("multer");
@@ -84,7 +74,9 @@ app.post("/admin/save-text", checkAuth, (req, res) => {
     ...req.body     // ✅ overwrite only changed text
   };
 
+ if (process.env.NODE_ENV !== "production") {
   fs.writeFileSync(TEXT_DATA, JSON.stringify(updated, null, 2));
+}
 
   res.json({ success: true });
 });
@@ -109,7 +101,9 @@ app.post("/contact", (req, res) => {
   };
 
   submissions.push(entry);
+ if (process.env.NODE_ENV !== "production") {
   fs.writeFileSync(DATA_FILE, JSON.stringify(submissions, null, 2));
+}
 
   // ✅ IMPORTANT CHANGE
   res.status(200).json({ success: true });
@@ -166,8 +160,9 @@ app.post("/admin/upload-image", checkAuth, upload.single("image"), (req, res) =>
 
   images[type] = `/uploads/homepage/${req.file.filename}`;
 
+if (process.env.NODE_ENV !== "production") {
   fs.writeFileSync(IMAGE_DATA, JSON.stringify(images, null, 2));
-
+}
   res.json({ success: true });
 });
 
@@ -250,7 +245,9 @@ app.post("/admin/delete-selected", checkAuth, (req, res) => {
 
   submissions = submissions.filter((_, i) => !indexes.includes(i));
 
+ if (process.env.NODE_ENV !== "production") {
   fs.writeFileSync(DATA_FILE, JSON.stringify(submissions, null, 2));
+}
   res.json({ success: true });
 });
 
@@ -259,7 +256,11 @@ app.post("/admin/delete-selected", checkAuth, (req, res) => {
  
 app.post("/admin/delete-all", checkAuth, (req, res) => {
   submissions = [];
+
+  if (process.env.NODE_ENV !== "production") {
   fs.writeFileSync(DATA_FILE, JSON.stringify(submissions, null, 2));
+}
+
   res.json({ success: true });
 });
 
@@ -299,7 +300,10 @@ app.post("/admin/save-prices", checkAuth, (req, res) => {
     ...req.body
   };
 
+  if (process.env.NODE_ENV !== "production") {
   fs.writeFileSync(PRICE_FILE, JSON.stringify(updated, null, 2));
+}
+
   res.json({ success: true });
 });
 
