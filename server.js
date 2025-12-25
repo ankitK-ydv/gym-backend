@@ -1,4 +1,14 @@
 
+const fs = require("fs");
+
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads");
+}
+if (!fs.existsSync("uploads/homepage")) {
+  fs.mkdirSync("uploads/homepage", { recursive: true });
+}
+
+
 console.log("🔥 THIS SERVER.JS FILE IS RUNNING 🔥");
 
 const multer = require("multer");
@@ -175,9 +185,14 @@ app.get("/admin/data", checkAuth, (req, res) => {
 });
 
 // ================= ADMIN PAGE (PROTECTED) =================
-app.get("/admin.html", checkAuth, (req, res) => {
-  res.sendFile(path.join(__dirname, "admin.html"));
+app.get("/adminlogin.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "adminlogin.html"));
 });
+
+app.get("/admin.html", checkAuth, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "admin.html"));
+});
+
 
 // ================= LOGOUT =================
 app.get("/logout", (req, res) => {
@@ -217,7 +232,8 @@ app.get("/admin/export-excel", checkAuth, (req, res) => {
 
 
 // ================= STATIC FILES =================
-app.use(express.static(__dirname));
+app.use(express.static("public"));
+
 
 
 
@@ -293,8 +309,10 @@ app.get("/test-route", (req, res) => {
 
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
+
 
 
 app.listen(PORT, () => {
