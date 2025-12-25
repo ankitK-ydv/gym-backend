@@ -12,13 +12,13 @@ const session = require("express-session");
 const app = express();
 let submissions = [];
 
-const DATA_FILE = path.join(__dirname, "submissions.json");
+const DATA_FILE = path.join(__dirname, "data","submissions.json");
 
 if (fs.existsSync(DATA_FILE)) {
   submissions = JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
 }
 
-const TEXT_DATA = path.join(__dirname, "homepage-text.json");
+const TEXT_DATA = path.join(__dirname, "data","homepage-text.json");
 
 if (!fs.existsSync(TEXT_DATA)) {
   fs.writeFileSync(TEXT_DATA, JSON.stringify({}, null, 2));
@@ -136,7 +136,7 @@ function checkAuth(req, res, next) {
 }
 
 // ================= IMAGE UPLOAD (ADMIN ONLY) =================
-const IMAGE_DATA = path.join(__dirname, "homepage-images.json");
+const IMAGE_DATA = path.join(__dirname, "data","homepage-images.json");
 
 if (!fs.existsSync(IMAGE_DATA)) {
   fs.writeFileSync(
@@ -268,7 +268,7 @@ app.post("/admin/delete-all", checkAuth, (req, res) => {
 
 //PRICE APIs
 
-const PRICE_FILE = path.join(__dirname, "prices.json");
+const PRICE_FILE = path.join(__dirname, "data","prices.json");
 
 if (!fs.existsSync(PRICE_FILE)) {
   fs.writeFileSync(
