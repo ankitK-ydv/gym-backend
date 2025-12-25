@@ -1,24 +1,30 @@
 
 console.log("🔥 THIS SERVER.JS FILE IS RUNNING 🔥");
+const fs = require("fs");
+const path = require("path");
 
+// 🔹 Ensure data folder exists (Render/Linux fix)
+const DATA_DIR = path.join(__dirname, "data");
+
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
 const multer = require("multer");
 const express = require("express");
 const bodyParser = require("body-parser");
-const fs = require("fs");
-const path = require("path");
 const cors = require("cors");
 const session = require("express-session");
 
 const app = express();
 let submissions = [];
 
-const DATA_FILE = path.join(__dirname, "data","submissions.json");
+const DATA_FILE = path.join(DATA_DIR, "submissions.json");
 
 if (fs.existsSync(DATA_FILE)) {
   submissions = JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
 }
 
-const TEXT_DATA = path.join(__dirname, "data","homepage-text.json");
+const TEXT_DATA = path.join(DATA_DIR, "homepage-text.json");
 
 if (!fs.existsSync(TEXT_DATA)) {
   fs.writeFileSync(TEXT_DATA, JSON.stringify({}, null, 2));
@@ -136,7 +142,7 @@ function checkAuth(req, res, next) {
 }
 
 // ================= IMAGE UPLOAD (ADMIN ONLY) =================
-const IMAGE_DATA = path.join(__dirname, "data","homepage-images.json");
+const IMAGE_DATA = path.join(DATA_DIR, "homepage-images.json");
 
 if (!fs.existsSync(IMAGE_DATA)) {
   fs.writeFileSync(
@@ -268,7 +274,7 @@ app.post("/admin/delete-all", checkAuth, (req, res) => {
 
 //PRICE APIs
 
-const PRICE_FILE = path.join(__dirname, "data","prices.json");
+const PRICE_FILE = path.join(DATA_DIR, "prices.json");
 
 if (!fs.existsSync(PRICE_FILE)) {
   fs.writeFileSync(
