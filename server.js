@@ -36,8 +36,9 @@ if (!fs.existsSync(TEXT_DATA)) {
 
 
 
+const PORT = process.env.PORT || 5000;
 
-const PORT = 5000;
+
 
 
 // ================= MIDDLEWARE =================
@@ -314,11 +315,7 @@ app.get("/", (req, res) => {
 
 
 
-
-app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
-});
-
+app.listen(PORT, () => console.log("Server running"));
 
 
 
